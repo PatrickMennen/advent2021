@@ -8,7 +8,8 @@ const countTotal = R.pipe(
             return pred[1] > pred[0];
         }
         return false;
-    })
+    }),
+    R.prop('length')
 );
 
 const countWindowedTotal = R.pipe(
@@ -21,8 +22,8 @@ const countWindowedTotal = R.pipe(
 const solutionOne = async (): Promise<void> =>  {
     const input = await fs.readFile('./input.txt');
     const points = input.toString().split('\n').map(input => Number(input));
-    console.log(`Part 1: `, countTotal(points).length);
-    console.log(`Part 2: `, countWindowedTotal(points).length);
+    console.log(`Part 1: `, countTotal(points))
+    console.log(`Part 2: `, countWindowedTotal(points));
 }
 
 const main = async () => {

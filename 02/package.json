@@ -1,0 +1,12 @@
+{
+  "name": "02",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "ts-fp": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.11"
+  }
+}

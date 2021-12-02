@@ -32,10 +32,10 @@ const moveWithAim = (command: Command, state: AimState): AimState => {
       const x = state.x + command.amount;
       const y = state.y + state.aim * command.amount;
 
-      return { x, y, aim: state.aim };
+      return { ...state, x, y };
 
     case 'up':
-      return { x: state.x, y: state.y, aim: state.aim - command.amount };
+      return { ...state, aim: state.aim - command.amount };
 
     case 'down':
       return { ...state, aim: state.aim + command.amount };
@@ -71,21 +71,14 @@ const createCommands = (input: string): Command => {
 
 const parseCommands = async (): Promise<Command[]> => {
   const input = await fs.readFile('./input.txt');
-  return input
-    .toString()
-    .split('\n')
-    .map((input) => createCommands(input));
+  return input.toString().split('\n').map(createCommands);
 };
 
 const solutionOne = (commands: Command[]) =>
-  commands.reduce((previous, next): State => {
-    return move(next, previous);
-  }, initialState);
+  commands.reduce((previous, next): State => move(next, previous), initialState);
 
 const solutionTwo = (commands: Command[]) =>
-  commands.reduce((previous, next): AimState => {
-    return moveWithAim(next, previous);
-  }, initialAimState);
+  commands.reduce((previous, next): AimState => moveWithAim(next, previous), initialAimState);
 
 const main = async () => {
   const commands = await parseCommands();

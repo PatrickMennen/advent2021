@@ -27,8 +27,10 @@ class Board {
   }
 
   private verticalBingo(index = 0): boolean {
-    const allItems = this.rows.map(row => row.filter((item, itemIndex) => item.completed && index === itemIndex));
-    const nonEmpty = allItems.filter(f => f.length !== 0);
+    const allItems = this.rows.map((row) =>
+      row.filter((item, itemIndex) => item.completed && index === itemIndex),
+    );
+    const nonEmpty = allItems.filter((f) => f.length !== 0);
 
     if (nonEmpty.length === 5) {
       return true;

@@ -39,12 +39,12 @@ const addVerticalCoordinates = (map: Map<string, number>, points: Point[]) => {
   const maxX = Math.max(points[0].x, points[1].x);
   const direction = maxX === startX ? 'down' : 'up';
 
-  let c = 0;
-  for (let i = verticalStart; i <= maxVertical; i++) {
-    const x = direction === 'up' ? startX + c : maxX - c;
-    c++;
+  let offset = 0;
+  for (let y = verticalStart; y <= maxVertical; y++) {
+    const x = direction === 'up' ? startX + offset : maxX - offset;
+    offset++;
 
-    createOrIncreaseAmount(map, x, i);
+    createOrIncreaseAmount(map, x, y);
   }
 };
 

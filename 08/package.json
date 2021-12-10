@@ -1,0 +1,13 @@
+{
+  "name": "08",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^16.11.12",
+    "@types/ramda": "^0.27.60"
+  },
+  "dependencies": {
+    "ramda": "^0.27.1"
+  }
+}

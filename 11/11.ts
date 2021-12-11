@@ -92,7 +92,8 @@ type ExplosionOutput = {
   flashes: number;
 };
 
-const calculateExplosions = (data: number[][], flashes: number = 0): ExplosionOutput => {
+const calculateExplosions = (input: number[][], flashes: number = 0): ExplosionOutput => {
+  const data = [...input];
   const squids = getExplodingSquids(data);
   const fieldsAfterExplosion = explodeSquids(data, squids);
 
@@ -105,9 +106,10 @@ const calculateExplosions = (data: number[][], flashes: number = 0): ExplosionOu
 
 const partOne = (data: number[][], runs: number, run = 1, flashes = 0): number => {
   const field = newField(data);
-  const totalExplosions = flashes + calculateExplosions(field).flashes;
+  const nextField = calculateExplosions(field);
+  const totalExplosions = flashes + nextField.flashes;
   if (run < runs) {
-    return partOne(field, runs, run + 1, totalExplosions);
+    return partOne(nextField.field, runs, run + 1, totalExplosions);
   }
 
   return totalExplosions;
@@ -119,10 +121,10 @@ const allExploded = (data: number[][]): boolean => {
 
 const partTwo = (data: number[][], run = 1): number => {
   const field = newField(data);
-  calculateExplosions(field);
+  const nextField = calculateExplosions(field).field;
 
-  if (!allExploded(field)) {
-    return partTwo(field, run + 1);
+  if (!allExploded(nextField)) {
+    return partTwo(nextField, run + 1);
   }
 
   return run;
@@ -132,7 +134,7 @@ const main = async () => {
   const data = await loadData();
 
   console.log('P1:', partOne(data, 100));
-  console.log('P2', partTwo(data));
+  console.log('P2:', partTwo(data));
 };
 
 main();
